@@ -2,19 +2,32 @@
 
 use App\Article;
 use App\Http\Requests;
+use App\Http\Requests\CreateArticleRequest;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Request;
+
 
 class ArticlesController extends Controller {
 
-	public function index()
+    /**
+     * Show all articles.
+     *
+     * @return Response
+     */
+    public function index()
     {
         $articles = Article::latest('published_at')->published()->get();
 
         return view('articles.index', compact('articles'));
     }
 
+    /**
+     * Show a single article
+     *
+     * @param Integer $id
+     * @return Response
+     */
     public function show($id)
     {
         $article = Article::findOrFail($id);
@@ -29,9 +42,17 @@ class ArticlesController extends Controller {
         return view('articles.create');
     }
 
-    public function store()
+    /**
+     * Save a new article
+     *
+     * @param CreateArticleRequest $request
+     * @return Response
+     */
+    public function store(CreateArticleRequest $request)
     {
-        Article::create(Request::all());
+        // validation is auto triggered
+
+        Article::create($request->all());
 
         return redirect('articles');
     }
