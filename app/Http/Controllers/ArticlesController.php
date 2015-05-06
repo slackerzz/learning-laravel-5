@@ -45,7 +45,7 @@ class ArticlesController extends Controller {
     /**
      * Save a new article
      *
-     * @param CreateArticleRequest $request
+     * @param ArticleRequest $request
      * @return Response
      */
     public function store(ArticleRequest $request)
@@ -57,12 +57,25 @@ class ArticlesController extends Controller {
         return redirect('articles');
     }
 
+    /**
+     * Edit an existing article;
+     *
+     * @param integer $id
+     * @return Response
+     */
     public function edit($id)
     {
         $article = Article::findOrFail($id);
         return view('articles.edit', compact('article'));
     }
 
+    /**
+     * Update an article.
+     *
+     * @param integer $id
+     * @param ArticleRequest $request
+     * @return Response
+     */
     public function update($id, ArticleRequest $request)
     {
         $article = Article::findOrFail($id);
