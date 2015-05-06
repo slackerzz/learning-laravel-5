@@ -3,6 +3,7 @@
 use App\Article;
 use App\Http\Requests;
 use App\Http\Requests\ArticleRequest;
+use Auth;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,10 @@ class ArticlesController extends Controller {
 
     }
 
+    /**
+     * Show the page to create a new article.
+     * @return Response
+     */
     public function create()
     {
         return view('articles.create');
@@ -51,8 +56,9 @@ class ArticlesController extends Controller {
     public function store(ArticleRequest $request)
     {
         // validation is auto triggered
+        $article = new Article($request->all());
 
-        Article::create($request->all());
+        Auth::user()->articles()->save($article);
 
         return redirect('articles');
     }
