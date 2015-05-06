@@ -2,7 +2,7 @@
 
 use App\Article;
 use App\Http\Requests;
-use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,11 +48,25 @@ class ArticlesController extends Controller {
      * @param CreateArticleRequest $request
      * @return Response
      */
-    public function store(CreateArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
         // validation is auto triggered
 
         Article::create($request->all());
+
+        return redirect('articles');
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update($id, ArticleRequest $request)
+    {
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
 
         return redirect('articles');
     }
