@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 
 class ArticlesController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'index']);
+    }
     /**
      * Show all articles.
      *
