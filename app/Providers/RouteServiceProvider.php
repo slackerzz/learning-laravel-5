@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\App;
 
 class RouteServiceProvider extends ServiceProvider {
 
@@ -24,7 +25,11 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-		//
+//        $router->bind('articles', function($id) {
+//            return \App\Article::published()->findOrFail($id);
+//        });
+
+		$router->model('articles', 'App\Article');
 	}
 
 	/**
