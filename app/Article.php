@@ -25,27 +25,50 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model {
 
-    // attributes that can be massAssigned
+    /*
+     * Fillable fields for an Article.
+     *
+     * @var array
+     */
 	protected $fillable = [
         'title',
         'body',
         'published_at',
-        'user_id' // temporary!!
     ];
 
+    /*
+     * Additional field to treat as Carbon istances;
+     *
+     * @var array
+     */
     protected $dates = ['published_at'];
 
+    /**
+     * Scope queries to articles that have been published.
+     *
+     * @param $query
+     */
     public function scopePublished($query)
     {
         $query->where('published_at', '<=', Carbon::now());
     }
 
+    /**
+     * Scope queries to articles that have not been published yet.
+     *
+     * @param $query
+     */
     public function scopeUnpublished($query)
     {
         $query->where('published_at', '>', Carbon::now());
     }
 
-    // setNameAttribute -> convention used by laravel for attribute mutator
+    /**
+     * Set the published ar attribute
+     * ( setNameAttribute -> convention used by laravel for attribute mutator )
+     *
+     * @param $date
+     */
     public function setPublishedAtAttribute($date)
     {
         $this->attributes['published_at'] = Carbon::parse($date);

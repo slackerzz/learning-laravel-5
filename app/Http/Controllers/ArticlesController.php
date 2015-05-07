@@ -15,6 +15,7 @@ class ArticlesController extends Controller {
     {
         $this->middleware('auth', ['except' => 'index']);
     }
+
     /**
      * Show all articles.
      *
@@ -30,7 +31,7 @@ class ArticlesController extends Controller {
     /**
      * Show a single article
      *
-     * @param Integer $id
+     * @param integer $id
      * @return Response
      */
     public function show($id)
@@ -44,6 +45,7 @@ class ArticlesController extends Controller {
 
     /**
      * Show the page to create a new article.
+     *
      * @return Response
      */
     public function create()
