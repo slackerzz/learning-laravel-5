@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css"/>
+    <link rel="stylesheet" href="{{ elixir('css/all.css') }}"/>
 </head>
 <body>
     <div class="container">
