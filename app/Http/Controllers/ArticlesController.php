@@ -58,11 +58,17 @@ class ArticlesController extends Controller {
     public function store(ArticleRequest $request)
     {
         // validation is auto triggered
-        $article = new Article($request->all());
+        Auth::user()->articles()->create($request->all());
 
-        Auth::user()->articles()->save($article);
-
-        return redirect('articles');
+        //session()->flash('flash_message', 'Your article has been created!');
+        //session()->flash('flash_message_important', true);
+        //flash()->success('Your article has been created!');
+        flash()->overlay('Your article has been successfully created!', 'Good Job');
+        //\Flash::success()
+        return redirect('articles');//->with([
+        //    'flash_message' => 'Your article has been created!',
+        //    'flash_message_important' => true
+        //]);
     }
 
     /**
