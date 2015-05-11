@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App\Article
@@ -13,13 +14,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at 
  * @property \Carbon\Carbon $published_at 
  * @property string $excerpt 
- * @method static \Illuminate\Database\Query\Builder|\App\Article whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Article whereTitle($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Article whereBody($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Article whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Article wherePublishedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Article whereExcerpt($value)
+ * @method static Builder|\App\Article whereId($value)
+ * @method static Builder|\App\Article whereTitle($value)
+ * @method static Builder|\App\Article whereBody($value)
+ * @method static Builder|\App\Article whereCreatedAt($value)
+ * @method static Builder|\App\Article whereUpdatedAt($value)
+ * @method static Builder|\App\Article wherePublishedAt($value)
+ * @method static Builder|\App\Article whereExcerpt($value)
  * @method static \App\Article published()
  * @method static \App\Article unpublished()
  */
@@ -92,5 +93,15 @@ class Article extends Model {
     public function tags()
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
+
+    /**
+     * Get a list of tags id associated with the current article.
+     *
+     * @return array
+     */
+    public function getTagListAttribute()
+    {
+        return $this->tags->lists('id');
     }
 }

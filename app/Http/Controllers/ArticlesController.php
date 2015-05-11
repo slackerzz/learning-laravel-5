@@ -46,29 +46,25 @@ class ArticlesController extends Controller {
      */
     public function create()
     {
-        return view('articles.create');
+        $tags = \App\Tag::lists('name', 'id');
+        return view('articles.create', compact('tags'));
     }
 
     /**
-     * Save a new article
+     * Save a new article.
      *
      * @param ArticleRequest $request
      * @return Response
      */
     public function store(ArticleRequest $request)
     {
-        // validation is auto triggered
-        Auth::user()->articles()->create($request->all());
+        $article = Auth::user()->articles()->create($request->all());
 
-        //session()->flash('flash_message', 'Your article has been created!');
-        //session()->flash('flash_message_important', true);
-        //flash()->success('Your article has been created!');
+        $article->tags()->attach($request->input('tag_list'));
+
         flash()->overlay('Your article has been successfully created!', 'Good Job');
-        //\Flash::success()
-        return redirect('articles');//->with([
-        //    'flash_message' => 'Your article has been created!',
-        //    'flash_message_important' => true
-        //]);
+
+        return redirect('articles');
     }
 
     /**
@@ -79,7 +75,8 @@ class ArticlesController extends Controller {
      */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $tags = \App\Tag::lists('name', 'id');
+        return view('articles.edit', compact('article', 'tags'));
     }
 
     /**
