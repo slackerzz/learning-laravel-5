@@ -65,7 +65,7 @@ class Article extends Model {
     }
 
     /**
-     * Set the published ar attribute
+     * Set the published_at attribute
      * ( setNameAttribute -> convention used by laravel for attribute mutator )
      *
      * @param $date
@@ -75,6 +75,15 @@ class Article extends Model {
         $this->attributes['published_at'] = Carbon::parse($date);
     }
 
+    /**
+     * Get the published_at attribute
+     * @param $date
+     * @return string
+     */
+    public function getPublishedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
     /**
      * An article is owned by a user.
      *

@@ -29,7 +29,17 @@ class RouteServiceProvider extends ServiceProvider {
 //            return \App\Article::published()->findOrFail($id);
 //        });
 
-		$router->model('articles', 'App\Article');
+		//$router->model('articles', 'App\Article');
+        $router->bind('articles', function($id)
+        {
+            return \App\Article::published()->findOrFail($id);
+        });
+
+        $router->bind('tags', function($name)
+        {
+            return \App\Tag::where('name', $name)->first();
+        });
+
 	}
 
 	/**
