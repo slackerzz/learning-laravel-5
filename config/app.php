@@ -146,8 +146,9 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // Laravel IDE helper
+        'App\Providers\ViewComposerServiceProvider',
 
-        'Laracasts\Flash\FlashServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider'
 	],
 
 	/*

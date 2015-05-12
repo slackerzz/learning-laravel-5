@@ -1,1 +1,1 @@
-{"version":3,"sources":["app.scss"],"names":[],"mappings":"AACA;EACE,mBAAa,EAAA;;AAGT;EACJ,iBAAY,EAAA","file":"app.css","sourcesContent":["//@import \"pages/home\";\nbody {\n  padding-top: 40px;\n}\n\nbody, label, .checkbox label {\n  font-width: 300;\n}"],"sourceRoot":"/source/"}
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AACA;EACE,mBAAa,EAAA;;AAGT;EACJ,kBAAa,EAAA","file":"app.css","sourcesContent":["//@import \"pages/home\";\nbody {\n  padding-top: 60px;\n}\n\nbody, label, .checkbox label {\n  font-weight: 300;\n}"],"sourceRoot":"/source/"}
